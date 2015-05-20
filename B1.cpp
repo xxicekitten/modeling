@@ -16,6 +16,8 @@ int S_to_int_size;
 int dist[maxn][maxn];
 int path[maxn][maxn];
 
+vector<int> path_name;
+
 void init(){
 	S_to_int_size = 0;
 	//cout << S_to_int.size();
@@ -112,13 +114,29 @@ void solve(){
 	cout << "solve complete" << endl;
 }
 
-void print_line(int a, int b){
+void print_line_split(int a, int b){
 	if(path[a][b] > 0){
-		print_line(a, path[a][b]);
-		print_line(path[a][b], b);
+		print_line_split(a, path[a][b]);
+		print_line_split(path[a][b], b);
 	}
 	else{
-		cout << int_to_S[b] << " ";
+		//cout << int_to_S[b] << " ";
+		path_name.push_back(b);
+	}
+}
+
+void print_line(int a, int b){
+	path_name.clear();
+
+	path_name.push_back(a);
+	print_line_split(a, b);
+
+	cout << int_to_S[path_name[0]];
+	for(int i = 0; i < path_name.size(); i ++){
+		if(i){
+			//cout << "--" << dist[path_name[i - 1]][path_name[i]] << "--" << int_to_S[path_name[i]];
+			cout << "--" << int_to_S[path_name[i]];
+		}
 	}
 }
 
