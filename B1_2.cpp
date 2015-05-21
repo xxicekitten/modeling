@@ -141,8 +141,8 @@ void make_graph(){
 void make_st_edge(string st){
 	int a = S_to_int[st];
 	for(int i = 0; i < line_num; i ++){
-		addEdge(start_node, a * line_num + i, 0, line_yuan[i]);
-		//addEdge(start_node, a * line_num + i, line_wait_time[i], line_yuan[i]);
+		//addEdge(start_node, a * line_num + i, 0, line_yuan[i]);
+		addEdge(start_node, a * line_num + i, line_wait_time[i] / 2, line_yuan[i]);
 	}
 }
 
