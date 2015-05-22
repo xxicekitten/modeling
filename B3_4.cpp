@@ -8,7 +8,7 @@
 
 using namespace std;
 
-//V002, V004, V006, V008
+//V002, V004, V006, V010
 vector<string> need[4];
 string hotel[4] = {"S0971", "S1153", "S1229", "S0965"};
 string final = "S0115";
