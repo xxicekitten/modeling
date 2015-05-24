@@ -15,6 +15,9 @@ const int inf = 0x7fffffff;
 
 const int line_num = 49;
 
+
+ofstream fout("output.txt");
+
 class Edge{
 public:
 	int x, y;
@@ -234,6 +237,7 @@ void get_ans(string ed){
 
 	cout << best_ans << endl;
 	cout << best_yuan << endl;
+	//fout << best_ans << "\t" << best_yuan << "\t";
 
 	reverse(line_s.begin(), line_s.end());
 	reverse(line_s_len.begin(), line_s_len.end());
@@ -244,10 +248,14 @@ void get_ans(string ed){
 		cout << "==> line" << current_line << ": ";
 		cout << int_to_S[current_node] << " ";
 		cout << "use: " << line_s_len[i] << endl;
+		//fout << " ==> line" << current_line << ": " << int_to_S[current_node] << " ";
 	}
+
+	//fout << endl;
 }
 
 void solve(){
+	
 	string st, ed;
 	while(cin >> st >> ed){
 		init();
@@ -256,6 +264,33 @@ void solve(){
 		spfa(start_node);
 		get_ans(ed);
 	}
+	
+
+	/*
+	vector<string> row;
+	for(int i = 0; i < 28; i ++){
+		string temp;
+		cin >> temp;
+		row.push_back(temp);
+	}
+	vector<string> column;
+	for(int i = 0; i < 22; i ++){
+		string temp;
+		cin >> temp;
+		column.push_back(temp);
+	}
+
+	for(int i = 0; i < 28; i ++){
+		for(int j = 0; j < 22; j ++){
+			fout << row[i] << " -- > " << column[j] << " \t";
+			init();
+			make_graph();
+			make_st_edge(row[i]);
+			spfa(start_node);
+			get_ans(column[j]);
+		}
+	}
+	*/
 }
 
 int main(){
