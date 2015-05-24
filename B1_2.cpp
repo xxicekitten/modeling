@@ -62,7 +62,7 @@ void addEdge(int x, int y, double cap, int yuan){
 void make_graph(){
 	//	1...line_num(49)
 	//	0		1		2		...	48
-	//  1*49+0	1*49+1	1*49+2	...	1*49+48
+	/	1*49+0	1*49+1	1*49+2	...	1*49+48
 	//	2*49+0	2*49+1	2*49+2	...	2*49+48
 
 	ifstream fin("input_1_2.txt");
@@ -109,26 +109,10 @@ void make_graph(){
 				b = S_to_int[split_line[i]];
 				
 				if(temp_yuan == 3){
-					//addEdge(a, b, 5, 0);
-					//addEdge(a, b, 5, 0);
-					/*
-					for(int p = 0; p < line_num; p ++){
-						addEdge(a * line_num + p, b * line_num + p, 5, 0);
-						addEdge(b * line_num + p, a * line_num + p, 5, 0);
-					}
-					*/
 					addEdge(a * line_num + line_pos, b * line_num + line_pos, 5, 0);
 					addEdge(b * line_num + line_pos, a * line_num + line_pos, 5, 0);
 				}
 				else{
-					//addEdge(a, b, 3, 0);
-					//addEdge(a, b, 3, 0);
-					/*
-					for(int p = 0; p < line_num; p ++){
-						addEdge(a * line_num + p, b * line_num + p, 3, 0);
-						addEdge(b * line_num + p, a * line_num + p, 3, 0);
-					}
-					*/
 					addEdge(a * line_num + line_pos, b * line_num + line_pos, 3, 0);
 					addEdge(b * line_num + line_pos, a * line_num + line_pos, 3, 0);
 				}
@@ -144,16 +128,12 @@ void make_graph(){
 void make_st_edge(string st){
 	int a = S_to_int[st];
 	for(int i = 0; i < line_num; i ++){
-		//addEdge(start_node, a * line_num + i, 0, line_yuan[i]);
 		addEdge(start_node, a * line_num + i, line_wait_time[i] / 2, line_yuan[i]);
 	}
 }
 
 void spfa(int start){
 	dis[start] = 0;
-
-	//
-	sum_yuan[start] = 0;
 	
 	vis[start] = true;
 	queue<int> q;
@@ -163,35 +143,24 @@ void spfa(int start){
 		q.pop();
 		vis[t] = false;
 		for(int j = head[t]; ~j; j = edge[j].next){
-			//int w = edge[j].c;
 			double w = edge[j].c;
 			
 			int temp = edge[j].y;
 			if(w + dis[t] < dis[temp]){
-				//
-				father[temp] = t;
 				father_len[temp] = w;
 
 				dis[temp] = w + dis[t];
-				//
-				sum_yuan[temp] = edge[j].yuan + sum_yuan[t];
 
 				if(!vis[temp]){
 					vis[temp] = true;
 					q.push(temp);
 				}
 			}
-
-			//still to update yuan;
 			if(w + dis[t] == dis[temp]){
 				if(edge[j].yuan + sum_yuan[t] < sum_yuan[temp]){
-					//
-					father[temp] = t;
 					father_len[temp] = w;
 
 					dis[temp] = w + dis[t];
-					//
-					sum_yuan[temp] = edge[j].yuan + sum_yuan[t];
 
 					if(!vis[temp]){
 						vis[temp] = true;
@@ -199,7 +168,6 @@ void spfa(int start){
 					}
 				}
 			}
-			
 		}
 	}
 }
